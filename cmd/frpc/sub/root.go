@@ -208,5 +208,7 @@ func startServiceWithAggregator(
 	if shouldGracefulClose {
 		go handleTermSignal(svr)
 	}
+
+	// 同时启动visit和proxy
 	return svr.Run(context.Background())
 }

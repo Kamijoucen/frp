@@ -176,6 +176,7 @@ func (pm *Manager) UpdateAll(proxyCfgs []v1.ProxyConfigurer) {
 			pm.proxies[name] = pxy
 			addPxyNames = append(addPxyNames, name)
 
+			// 启动一个proxy配置
 			pxy.Start()
 		}
 	}

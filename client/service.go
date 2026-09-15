@@ -345,6 +345,7 @@ func (svr *Service) loopLoginUntilSuccess(maxInterval time.Duration, firstLoginE
 		}
 		ctl.SetInWorkConnCallback(svr.handleWorkConnCb)
 
+		// 启动所有proxy和visite
 		ctl.Run(proxyCfgs, visitorCfgs)
 		// close and replace previous control
 		svr.ctlMu.Lock()

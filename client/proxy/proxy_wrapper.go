@@ -165,6 +165,8 @@ func (pw *Wrapper) SetRunningStatus(remoteAddr string, respErr string) error {
 }
 
 func (pw *Wrapper) Start() {
+
+	// 这里才是真实启动proxy
 	go pw.checkWorker()
 	if pw.monitor != nil {
 		go pw.monitor.Start()
@@ -215,6 +217,8 @@ func (pw *Wrapper) checkWorker() {
 				pw.Cfg.MarshalToMsg(&newProxyMsg)
 				newProxyMsg.ProxyName = pw.wireName
 				pw.lastSendStartMsg = now
+
+				
 				_ = pw.handler(&event.StartProxyPayload{
 					NewProxyMsg: &newProxyMsg,
 				})

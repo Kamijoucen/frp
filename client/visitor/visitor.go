@@ -163,6 +163,8 @@ func (v *BaseVisitor) Close() {
 }
 
 func (v *BaseVisitor) dialRawVisitorConn(cfg *v1.VisitorBaseConfig) (net.Conn, error) {
+
+	// 获取 frps 连接
 	visitorConn, err := v.helper.ConnectServer()
 	if err != nil {
 		return nil, fmt.Errorf("connect to server error: %v", err)
@@ -170,6 +172,8 @@ func (v *BaseVisitor) dialRawVisitorConn(cfg *v1.VisitorBaseConfig) (net.Conn, e
 
 	now := time.Now().Unix()
 	targetProxyName := naming.BuildTargetServerProxyName(v.clientCfg.User, cfg.ServerUser, cfg.ServerName)
+
+	// 构建一个 frp 协议的握手连接
 	newVisitorConnMsg := &msg.NewVisitorConn{
 		RunID:          v.helper.RunID(),
 		ProxyName:      targetProxyName,
